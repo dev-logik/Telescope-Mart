@@ -1,62 +1,55 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
+import 'package:telescope_mart/auth/auth_service.dart';
+import 'package:telescope_mart/firebase_options.dart';
+import 'package:telescope_mart/pages/dashboard_page.dart';
+import 'package:telescope_mart/pages/login_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Telescope Mart',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: _router,
+      debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+  final _router = GoRouter(
+    initialLocation: DashboardPage.routeName,
+    debugLogDiagnostics: true,
+    redirect: _redirect,
+    routes: [
+      GoRoute(
+        path: DashboardPage.routeName,
+        name: DashboardPage.routeName,
+        builder: (context, state) => const DashboardPage(),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      GoRoute(
+        path: LoginPage.routeName,
+        name: LoginPage.routeName,
+        builder: (context, state) => const LoginPage(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+    ],
+  );
+
+  static FutureOr<String?> _redirect(BuildContext _, GoRouterState state) {
+    if (AuthService.currentUser == null) {
+      return LoginPage.routeName;
+    }
+    return null;
   }
 }

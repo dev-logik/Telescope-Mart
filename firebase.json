@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"telescope-mart","appId":"1:1062639968871:android:c42c0bf7f782e86b992ac2","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"telescope-mart","configurations":{"android":"1:1062639968871:android:c42c0bf7f782e86b992ac2","ios":"1:1062639968871:ios:8920ebd27977b00a992ac2"}}}}}}
