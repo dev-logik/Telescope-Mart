@@ -94,6 +94,11 @@ class _LoginPageState extends State<LoginPage> {
         EasyLoading.dismiss();
         if (context.mounted && isLoggedIn) {
           context.goNamed(DashboardPage.routeName);
+        } else {
+          AuthService.logout;
+          setState(() {
+            _errorMessage = "This is not an admin account.";
+          });
         }
       } on FirebaseAuthException catch (error) {
         EasyLoading.dismiss();

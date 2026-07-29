@@ -4,15 +4,27 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:telescope_mart/auth/auth_service.dart';
 import 'package:telescope_mart/firebase_options.dart';
+import 'package:telescope_mart/pages/add_telescope_page.dart';
+import 'package:telescope_mart/pages/brand_page.dart';
 import 'package:telescope_mart/pages/dashboard_page.dart';
 import 'package:telescope_mart/pages/login_page.dart';
+import 'package:telescope_mart/pages/view_telescope_page.dart';
+import 'package:telescope_mart/providers/telescope_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TelescopeProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,6 +49,23 @@ class MyApp extends StatelessWidget {
         path: DashboardPage.routeName,
         name: DashboardPage.routeName,
         builder: (context, state) => const DashboardPage(),
+        routes: [
+          GoRoute(
+            path: ViewTelescopePage.routeName,
+            name: ViewTelescopePage.routeName,
+            builder: (context, state) => ViewTelescopePage(),
+          ),
+          GoRoute(
+            path: AddTelescopePage.routeName,
+            name: AddTelescopePage.routeName,
+            builder: (context, state) => AddTelescopePage(),
+          ),
+          GoRoute(
+            path: BrandPage.routeName,
+            name: BrandPage.routeName,
+            builder: (context, state) => BrandPage(),
+          ),
+        ],
       ),
       GoRoute(
         path: LoginPage.routeName,
