@@ -38,6 +38,6 @@ void showSingleTextInputDialog({
   );
 }
 
-showMessage(BuildContext context, String msg) {
+void showMessage(BuildContext context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
 }
