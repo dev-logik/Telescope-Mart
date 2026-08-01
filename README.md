@@ -17,20 +17,20 @@ Telescope Mart is a comprehensive Flutter-based admin application designed for m
 
 ## 📸 Screenshots
 
-| Dashboard | Add Telescope | Telescope Details |
+| Dashboard | Add Brand | Telescope Details |
 | :---: | :---: | :---: |
-| ![Dashboard](assets/screenshots/Screenshot_2.png) | ![Add Telescope](assets/screenshots/Screenshot_5.png) | ![Telescope Details](assets/screenshots/Screenshot_6.png) |
+| ![Dashboard](assets/screenshots/Screenshot_2.png) | ![Add Telescope](assets/screenshots/Screenshot_5.png) | ![Telescope Details](assets/screenshots/Screenshot_1.png) |
 
 <details>
 <summary>View More Screenshots</summary>
 
-| Login | Brand Management | View Inventory |
+| Brand Management | Brand Management 2 | View Inventory |
 | :---: | :---: | :---: |
-| ![Login](assets/screenshots/Screenshot_1.png) | ![Brand Page](assets/screenshots/Screenshot_3.png) | ![View Telescopes](assets/screenshots/Screenshot_4.png) |
+| ![Login](assets/screenshots/Screenshot_3.png) | ![Brand Page](assets/screenshots/Screenshot_6.png) | ![View Telescopes](assets/screenshots/Screenshot_4.png) |
 
-| Product Description | Settings/Other |
+| Product Description | View Telescope Image |
 | :---: | :---: |
-| ![Description](assets/screenshots/Screenshot_7.png) | ![Other](assets/screenshots/Screenshot_8.png) |
+| ![Description](assets/screenshots/Screenshot_9.png) | ![Other](assets/screenshots/Screenshot_8.png) |
 
 </details>
 
@@ -45,23 +45,26 @@ Telescope Mart is a comprehensive Flutter-based admin application designed for m
 
 ### Installation & Setup
 
-1.  **Clone the repository**:
+1. **Clone the repository**:
+
     ```bash
     git clone https://github.com/yourusername/telescope_mart.git
     cd telescope_mart
     ```
 
-2.  **Install dependencies**:
+2. **Install dependencies**:
+
     ```bash
     flutter pub get
     ```
 
-3.  **Firebase Configuration**:
+3. **Firebase Configuration**:
     - Add your `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) to the respective directories.
     - Run `flutterfire configure` if you have the CLI installed to update `lib/firebase_options.dart`.
 
-4.  **Supabase Configuration**:
+4. **Supabase Configuration**:
     - Ensure your Supabase URL and Anon Key are correctly set in `lib/main.dart`:
+
     ```dart
     await Supabase.initialize(
       url: "YOUR_SUPABASE_URL",
@@ -69,13 +72,15 @@ Telescope Mart is a comprehensive Flutter-based admin application designed for m
     );
     ```
 
-5.  **Generate Models**:
+5. **Generate Models**:
     This project uses `freezed`. Run the following to generate the model files:
+
     ```bash
     dart run build_runner build --delete-conflicting-outputs
     ```
 
-6.  **Run the app**:
+6. **Run the app**:
+
     ```bash
     flutter run
     ```
